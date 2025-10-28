@@ -1,0 +1,250 @@
+/* Basic reset */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+:root {
+  /* Color Palette */
+  --primary-color: #007bff; /* Bright Blue for actions/highlights */
+  --secondary-color: #6c757d; /* Grey for secondary text */
+  --background-dark: #2c3e50; /* Dark Blue/Grey for navbar/footer */
+  --background-light: #f4f6f9; /* Light Grey for body background */
+  --card-bg: #ffffff; /* White for cards */
+  --danger-color: #dc3545; /* Red for emphasis/alerts (like review label) */
+  --success-color: #28a745; /* Green for success/real reviews */
+  --text-dark: #343a40; /* Dark text */
+  --text-light: #ffffff; /* Light text for dark backgrounds */
+  --border-color: #e9ecef; /* Light border */
+}
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  background-color: var(--background-light);
+  color: var(--text-dark);
+  padding-top: 70px; /* Space for fixed navbar */
+  line-height: 1.6;
+}
+
+.app-container {
+  max-width: 1300px; /* Max width for content */
+  margin: 0 auto;
+  padding: 0 20px 60px;
+}
+
+/* --- Navigation Bar --- */
+.navbar {
+  background-color: var(--background-dark);
+  color: var(--text-light);
+  padding: 15px 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 1000;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.navbar-brand {
+  font-size: 1.8rem;
+  font-weight: 700;
+  padding-left: 20px;
+  color: var(--primary-color); /* Highlight brand name */
+  letter-spacing: 1px;
+}
+
+.navbar-links a {
+  margin-right: 25px;
+  color: var(--text-light);
+  text-decoration: none;
+  font-size: 1rem;
+  font-weight: 500;
+  transition: color 0.3s, border-bottom 0.3s;
+  padding-bottom: 3px;
+}
+
+.navbar-links a:hover {
+  color: var(--primary-color);
+  border-bottom: 2px solid var(--primary-color);
+}
+
+/* --- Main Title --- */
+.store-title {
+  text-align: center;
+  margin-top: 40px;
+  font-size: 2.8rem;
+  font-weight: 800;
+  color: var(--text-dark);
+  margin-bottom: 50px;
+  letter-spacing: 0.5px;
+}
+
+/* --- Product List --- */
+.product-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 30px;
+  justify-content: center;
+}
+
+/* --- Product Card --- */
+.product-card {
+  width: 300px; /* Slightly wider card */
+  padding: 25px;
+  border-radius: 12px;
+  background-color: var(--card-bg);
+  border: 1px solid var(--border-color);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.05);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  text-align: left;
+  display: flex;
+  flex-direction: column;
+}
+
+.product-card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+}
+
+.product-image {
+  width: 100%;
+  height: auto;
+  border-radius: 8px;
+  object-fit: cover;
+  margin-bottom: 15px;
+  border: 1px solid var(--border-color);
+}
+
+.product-card h2 {
+  font-size: 1.4rem;
+  font-weight: 600;
+  color: var(--text-dark);
+  margin: 0 0 5px 0;
+}
+
+.price {
+  font-size: 1.3rem;
+  font-weight: 700;
+  color: var(--danger-color); /* Use a strong color for price */
+  margin-bottom: 15px;
+}
+
+/* --- Reviews Section --- */
+
+.product-card h3 {
+    font-size: 1rem;
+    color: var(--secondary-color);
+    border-bottom: 1px solid var(--border-color);
+    padding-bottom: 5px;
+    margin-bottom: 10px;
+}
+
+.review-list {
+  list-style-type: none;
+  padding-left: 0;
+  margin-bottom: 15px;
+  font-size: 0.9rem;
+  color: var(--text-dark);
+}
+
+.review-list li {
+    margin-bottom: 5px;
+    padding: 5px;
+    background-color: #f8f9fa;
+    border-radius: 4px;
+    word-wrap: break-word;
+}
+
+/* Style for the review labels injected by the React component */
+.review-list li:has(span.fake-label) {
+    border-left: 4px solid var(--danger-color);
+}
+.review-list li:has(span.real-label) {
+    border-left: 4px solid var(--success-color);
+}
+
+/* --- Review Form Elements --- */
+.review-input {
+  width: 100%;
+  padding: 10px 12px;
+  margin-bottom: 10px;
+  border-radius: 6px;
+  border: 1px solid var(--border-color);
+  font-size: 1rem;
+  transition: border-color 0.3s, box-shadow 0.3s;
+}
+
+.review-input:focus {
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
+    outline: none;
+}
+
+.submit-button {
+  background-color: var(--primary-color);
+  color: var(--text-light);
+  padding: 10px 20px;
+  border: none;
+  border-radius: 6px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.1s ease;
+  width: 100%; /* Full width button */
+}
+
+.submit-button:hover:not(:disabled) {
+  background-color: #0056b3;
+  transform: translateY(-1px);
+}
+
+.submit-button:disabled {
+  background-color: #adb5bd;
+  cursor: not-allowed;
+  opacity: 0.8;
+}
+
+/* Additional utility classes for better review display */
+.fake-label {
+    color: var(--danger-color);
+    font-weight: 700;
+}
+.real-label {
+    color: var(--success-color);
+    font-weight: 700;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .navbar {
+        flex-direction: column;
+        align-items: flex-start;
+        padding-bottom: 10px;
+    }
+    .navbar-brand {
+        padding-left: 10px;
+        padding-bottom: 5px;
+    }
+    .navbar-links {
+        width: 100%;
+        text-align: center;
+    }
+    .navbar-links a {
+        margin: 0 10px;
+    }
+    .app-container {
+        padding: 0 10px 40px;
+    }
+    .store-title {
+        font-size: 2.2rem;
+        margin-top: 130px; /* Adjust for stacked navbar */
+    }
+    .product-card {
+        width: 100%;
+        max-width: 350px;
+    }
+}
