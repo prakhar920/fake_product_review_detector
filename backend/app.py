@@ -6,21 +6,24 @@ app = Flask(__name__)
 CORS(app)  # ✅ Allow requests from any origin (React frontend)
 
 # Load your trained model + vectorizer
-model = joblib.load("model.pkl")
-vectorizer = joblib.load("vectorizer.pkl")
+model = joblib.load("../model.pkl")
+vectorizer = joblib.load("../vectorizer.pkl")
 
 @app.route("/predict", methods=["POST"])
 def predict():
     data = request.get_json()
-    review_text = data["review"]
+    review_text = data.get("review", "")
+    if not review_text:
+        return jsonify({"error": "No review text provided"}), 400
 
-    # Convert review into features
-    features = vectorizer.transform([review_text])
-    prediction = model.predict(features)[0]
+    try:
+        features = vectorizer.transform([review_text])
+        prediction = model.predict(features)[0]
+        label = "Fake" if prediction == "CG" else "Real"
+        return jsonify({"prediction": label})
+    except Exception as e:
+        return jsonify({"error": str(e)}), 500
 
-    label = "Fake" if prediction == "CG" else "Real"
-
-    return jsonify({"prediction": label})
 
 if __name__ == "__main__":
     app.run(debug=True)
